@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Bellefair&display=swap');
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+/* @import 'shadcn/tailwind.css'; */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-invitation: 'Bellefair', serif;
+}
+
+@theme inline {
+  --color-ring: hsl(var(--ring));
+  --color-input: hsl(var(--input));
+  --color-border: hsl(var(--border));
+  --color-destructive: hsl(var(--destructive));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card: hsl(var(--card));
+  --color-foreground: hsl(var(--foreground));
+  --color-background: hsl(var(--background));
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: 35 30% 95%;
+  --foreground: 25 35% 22%;
+  --card: 35 35% 90%;
+  --card-foreground: 25 35% 22%;
+  --popover: 35 30% 95%;
+  --popover-foreground: 25 35% 22%;
+  --primary: 172 11% 56%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 2 65% 45%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 30 25% 85%;
+  --muted-foreground: 25 20% 45%;
+  --accent: 172 25% 45%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 75% 50%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 30 25% 78%;
+  --input: 30 25% 78%;
+  --ring: 172 11% 56%;
+  --radius: 0rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-main;
+  }
+}

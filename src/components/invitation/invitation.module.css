@@ -1,0 +1,202 @@
+@import 'tailwindcss';
+
+.scene {
+  --env-back: #e3a65a;
+  --env-line-color: rgba(255, 255, 255, 0.45);
+  --env-line-width: 4px;
+  --env-line-gap: 20px;
+  --env-folds: #d18d42;
+  --env-front: #b8752e;
+  --paper-texture: url('@/assets/bg/egg-shell.png');
+  position: relative;
+  aspect-ratio: 7/5;
+  perspective: 1200px;
+  @apply w-[350px] sm:w-[664px];
+}
+
+.envelope-wrapper {
+  --y-move-distance: 55vh;
+  --z-envelope-distance: 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: envMoveDown 1.5s cubic-bezier(0.4, 0, 0.6, 1) 0.4s forwards;
+  transform-style: preserve-3d;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px 3px 8px 8px;
+  z-index: 10;
+  background-image:
+    var(--paper-texture),
+    repeating-linear-gradient(
+      90deg,
+      var(--env-line-color),
+      var(--env-line-color) var(--env-line-width),
+      transparent var(--env-line-width),
+      transparent var(--env-line-gap)
+    );
+  background-color: var(--env-back);
+  background-blend-mode: soft-light, normal;
+  transform: translateZ(0px);
+}
+
+.envelope-fold-left,
+.envelope-fold-right,
+.envelope-fold-bottom {
+  position: absolute;
+  background-color: var(--env-folds);
+  background-image: var(--paper-texture);
+  background-blend-mode: overlay;
+  z-index: 30;
+  transform: translateZ(2px);
+}
+
+.envelope-fold-left {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  clip-path: polygon(0 0, 80% 40%, 80% 60%, 0 100%);
+}
+
+.envelope-fold-right {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  clip-path: polygon(100% 0, 20% 40%, 20% 60%, 100% 100%);
+}
+
+.envelope-fold-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background-color: var(--env-front);
+  clip-path: polygon(0 100%, 30% 15%, 70% 15%, 100% 100%);
+  z-index: 40;
+  transform: translateZ(3px);
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  animation: flapOpen 0.8s ease-out 0.2s forwards;
+}
+
+.envelope-flap-front {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  transform: rotateX(0deg) translateZ(4px);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-radius: 3px 3px 0 0;
+  backface-visibility: hidden;
+  background-color: var(--env-front);
+  background-image: var(--paper-texture);
+  background-blend-mode: overlay;
+}
+
+.envelope-flap-shadow {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: rgba(60, 29, 0, 0.25);
+  filter: blur(400px);
+  transform: translateY(6px) translateZ(3.9px);
+}
+
+.envelope-flap-back {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  border-radius: 3px 3px 0 0;
+  transform: rotateX(180deg) translateZ(0px);
+  backface-visibility: hidden;
+  background-image:
+    var(--paper-texture),
+    repeating-linear-gradient(
+      90deg,
+      var(--env-line-color),
+      var(--env-line-color) var(--env-line-width),
+      transparent var(--env-line-width),
+      transparent var(--env-line-gap)
+    );
+  background-color: var(--env-back);
+  background-blend-mode: soft-light, normal;
+}
+
+.invitation {
+  --z-invitation-distance: 300px;
+  position: absolute;
+  aspect-ratio: 5/7;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  animation: cardReveal 1.8s cubic-bezier(0.4, 0, 0.6, 1) 0.9s forwards;
+  @apply w-full max-w-[224px] sm:max-w-[450px];
+  transform: translate(-50%, -50%) rotate(-90deg) translateZ(1px);
+
+  img {
+    mix-blend-mode: multiply;
+  }
+}
+
+@media (max-width: 639px) {
+  .invitation {
+    --z-invitation-distance: 150px;
+  }
+  .envelope-wrapper {
+    --z-envelope-distance: 250px;
+    --y-move-distance: 40vh;
+  }
+}
+
+/* ANIMATIONS */
+
+@keyframes envMoveDown {
+  0% {
+    transform: translate(-50%, -50%) translateZ(0px);
+  }
+  100% {
+    transform: translate(-50%, calc(-50% + var(--y-move-distance)))
+      translateZ(var(--z-envelope-distance));
+  }
+}
+
+@keyframes flapOpen {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(180deg);
+  }
+}
+
+@keyframes cardReveal {
+  0% {
+    transform: translate(-50%, -50%) rotate(-90deg) translateZ(1px);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - var(--y-move-distance)))
+      rotate(-90deg);
+  }
+  100% {
+    transform: translate(-50%, calc(-50% - var(--y-move-distance))) rotate(0deg)
+      translateZ(var(--z-invitation-distance));
+  }
+}
