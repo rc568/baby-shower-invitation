@@ -37,6 +37,17 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-show-up: show-up 0.7s ease-out 1.2s forwards;
+
+  @keyframes show-up {
+    0% {
+      translate: 0% 100%;
+    }
+    100% {
+      translate: 0% 0%;
+    }
+  }
 }
 
 :root {
@@ -67,6 +78,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

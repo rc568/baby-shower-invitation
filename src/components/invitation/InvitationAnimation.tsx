@@ -2,21 +2,34 @@ import BgInvitation from '@/assets/bg/bg-invitation.jpg';
 import InvitationLgJpg from '@/assets/images/invitacion-baby-lg.jpg';
 import InvitationLgWebp from '@/assets/images/invitacion-baby-lg.webp';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, type AnimationEventHandler } from 'react';
 import styles from './invitation.module.css';
 
-export const InvitationAnimation = () => {
+interface Props {
+  onAnimationComplete: (val: boolean) => void;
+}
+
+export const InvitationAnimation = ({ onAnimationComplete }: Props) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
+  const handleAnimationEnd: AnimationEventHandler<HTMLDivElement> = (e) => {
+    if (e.animationName.includes('cardReveal')) {
+      onAnimationComplete(true);
+    }
+  };
+
   return (
-    <div className="h-full w-full flex justify-center items-center">
+    <div className="h-full w-full flex justify-center items-center relative">
       <div className={styles.scene}>
         <div
           className={cn(styles['envelope-wrapper'], { paused: !isImageLoaded })}
         >
           <div className={styles['envelope-back']}></div>
 
-          <div className={cn(styles.invitation, { paused: !isImageLoaded })}>
+          <div
+            className={cn(styles.invitation, { paused: !isImageLoaded })}
+            onAnimationEnd={handleAnimationEnd}
+          >
             <div
               className="border border-none relative shadow-[-8px_12px_16px_rgba(0,0,0,0.35)] sm:shadow-[-10px_14px_20px_rgba(0,0,0,0.35)] overflow-hidden"
               style={{
