@@ -29,7 +29,7 @@ export const Hero = ({ color }: { color: 'red' | 'green' | 'white' }) => {
           onClick={handleConfirmClick}
           className="absolute inset-x-0 bottom-0 text-center h-10 sm:h-12 flex items-center justify-center bg-primary text-primary-foreground translate-y-full animate-show-up z-100"
         >
-          <div className="text-sm sm:text-base flex gap-2 items-center justify-center">
+          <div className="text-sm sm:text-base flex gap-2 items-center justify-center font-main">
             <span className="inline-block">¡Completa el formulario aquí!</span>
             <div
               className="w-3 h-3 border-b-2 border-r-2 border-primary-foreground/80 rotate-45 rounded-[1px] -translate-y-0.5"
