@@ -10,7 +10,7 @@ export const RSVPForm = () => {
 
   return (
     <section
-      id="rsvp"
+      id="asistencia"
       className="flex items-center justify-center z-10 min-h-dvh mx-auto p-6 py-12 sm:px-12 sm:max-w-160"
     >
       <div className="font-main">

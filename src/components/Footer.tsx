@@ -2,7 +2,10 @@ import { Button } from './ui/button';
 
 export const Footer = () => {
   return (
-    <footer className="font-main text-center pb-12 mx-auto p-6 py-12 sm:px-12 sm:max-w-160">
+    <footer
+      id="regalos"
+      className="font-main text-center pb-12 mx-auto p-6 py-12 sm:px-12 sm:max-w-160"
+    >
       <h2 className="text-xl sm:text-3xl font-semibold text-foreground mb-2">
         Sugerencia de regalos
       </h2>

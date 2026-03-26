@@ -1,5 +1,6 @@
 import { type Guest, type GuestErrors } from '@/interfaces/guest.interface';
 import { apiMapper } from '@/lib/api-mapper';
+import { scrollToElement } from '@/lib/scroll';
 import supabase from '@/utils/supabase';
 import { useState, type SyntheticEvent } from 'react';
 import { toast } from 'sonner';
@@ -43,6 +44,7 @@ export const useForm = () => {
       if (error) throw error;
 
       toast.success('¡Gracias por confirmar tu asistencia!');
+      scrollToElement('#regalos', 1200);
       setFormData(defaultValues);
     } catch {
       toast.error('Ocurrió un error inesperado. ¡Vuelve a intentar!');
